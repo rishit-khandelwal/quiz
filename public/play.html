@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <select name="states" id="states"></select>
+    <button onclick="go()">Go</button>
+    <script>
+      let states;
+      window.onload = async () => {
+        const state = document.getElementById("states");
+        const value = await (await fetch("/api/states")).json();
+
+        states = value["data"];
+
+        value["data"].forEach((v) => {
+          state.add(
+            (() => {
+              let x = document.createElement("option");
+              x.innerText = v;
+              return x;
+            })()
+          );
+        });
+      };
+      async function showPopUpFor(state) {
+        window.location = `/quiz?state=${state}`;
+      }
+
+      function go() {
+        const state = document.getElementById("states");
+        showPopUpFor(states[state.selectedIndex].toLowerCase());
+      }
+    </script>
+  </body>
+</html>

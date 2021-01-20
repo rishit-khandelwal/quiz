@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="question"></div>
+    <br />
+    <ol id="options"></ol>
+    <script>
+      let blocking = false;
+      let _i = new URLSearchParams(window.location.search).get("id") || 0;
+
+      window.score = 0;
+      const displayScore = () => {
+        alert(score);
+        window.location = "/play";
+      };
+      window.onload = async () => {
+        let scoreBait = 1000;
+        setInterval(() => {
+          scoreBait /= 2;
+        }, 1000);
+        try {
+          let [{ id, prompt, options, correct }] = await (
+            await fetch(
+              "/api/getq/" +
+                (new URLSearchParams(window.location.search).get("state") ||
+                  "kerela") +
+                "/" +
+                _i.toString()
+            )
+          ).json();
+
+          if (prompt.startsWith("html:")) {
+            document.getElementById("question").innerHTML = prompt
+              .slice(5)
+              .replaceAll(";", "");
+          } else {
+            document.getElementById("question").innerText = prompt;
+          }
+          options.forEach((_, i, a) => {
+            let x = document.createElement("li");
+            x.innerText = _;
+
+            x.onclick = () => {
+              if (blocking) {
+                return;
+              }
+              if (i == correct) {
+                x.classList.add("yeehaw");
+                setTimeout(() => {
+                  x.classList.remove("yeehaw");
+                  _i += 1;
+                  document.getElementById("options").innerHTML = "";
+                  window.score += scoreBait;
+                  window.onload();
+                }, 1000);
+              } else {
+                console.log("wrong");
+                x.classList.add("cry");
+                setTimeout(() => x.classList.remove("cry"), 1000);
+              }
+              blocking = true;
+              setTimeout(() => (blocking = false), 700);
+            };
+
+            document.getElementById("options").appendChild(x);
+          });
+        } catch {
+          displayScore();
+        }
+      };
+    </script>
+  </body>
+</html>

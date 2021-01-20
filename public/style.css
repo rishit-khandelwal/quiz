@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  user-select: none;
+}
+
+body {
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  padding-left: 40vw;
+  width: 20%;
+  height: 20%;
+}
+
+body * {
+  font-family: "Roboto";
+  text-overflow: clip;
+
+  color: #eee;
+}
+
+h1 {
+  margin-left: 40vw;
+  /* margin-top: 20vh; */
+}
+
+button {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 2rem;
+}
+button:focus {
+  border: none;
+}
+
+#popup {
+  background-color: #999;
+  color: rgba(0, 0, 0, 0);
+  width: 30vw;
+  text-align: center;
+  justify-self: center;
+  position: absolute;
+  z-index: 2;
+  margin-left: 30vw;
+}
+
+.yeehaw {
+  color: #0f0;
+  transition: 0.5s;
+  animation-name: happy;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cry {
+  color: #f00;
+  transition: 0.5s;
+  animation-name: sad;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes happy {
+  from {
+    /* transform: rotateY(3deg); */
+    transform: translateY(4px);
+  }
+  to {
+    transform: translateY(-4px);
+    /* transform: rotateY(-3deg); */
+  }
+}
+
+@keyframes sad {
+  from {
+    transform: rotateY(3deg);
+  }
+  to {
+    transform: rotateY(-3deg);
+  }
+}
+
+#question {
+  transition: 0.4s;
+  font-size: 200%;
+}
+
+#options {
+  font-size: 120%;
+}
+
+select {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 200%;
+  text-align: center;
+}
+
+option {
+  background-color: rgba(0, 0, 0, 1);
+  color: #fff;
+}
