@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add questions</title>
+  </head>
+  <body>
+    <input id="state" placeholder="state" />
+    <input id="question" placeholder="Prompt" />
+    <input id="id-1" placeholder="Option 1" />
+    <input id="id-2" placeholder="Option 2" />
+    <input id="id-3" placeholder="Option 3" />
+    <input id="id-4" placeholder="Option 4" />
+    <input type="number" id="correct" placeholder="Correct Option 1/2/3/4" />
+    <button onclick="put()">Add</button>
+
+    <script>
+      function put() {
+        const prompt = document.getElementById("question").value;
+        const options = [
+          document.getElementById("id-1"),
+          document.getElementById("id-2"),
+          document.getElementById("id-3"),
+          document.getElementById("id-4"),
+        ].map((v) => v.value);
+        const correct = document.getElementById("correct").value - 1;
+        const state = document.getElementById("state").value;
+
+        const heads = new Headers({
+          data: encodeURI(
+            JSON.stringify({
+              state: state,
+              prompt: prompt,
+              ops: options,
+              correct: correct,
+            })
+          ),
+        });
+
+        fetch("/add", {
+          method: "POST",
+          headers: heads,
+        }).then(() => {});
+      }
+    </script>
+  </body>
+</html>
