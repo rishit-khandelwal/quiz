@@ -31,7 +31,7 @@
         const heads = new Headers({
           data: encodeURI(
             JSON.stringify({
-              state: state,
+              state: state.toLowerCase(),
               prompt: prompt,
               ops: options,
               correct: correct,
@@ -42,7 +42,12 @@
         fetch("/add", {
           method: "POST",
           headers: heads,
-        }).then(() => {});
+        })
+          .then((s) => s.json())
+
+          .then(({ stat }) => {
+            alert(stat == 0xabc ? "Success" : "Error");
+          });
       }
     </script>
   </body>

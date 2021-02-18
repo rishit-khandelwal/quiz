@@ -10,6 +10,7 @@
     <div id="question"></div>
     <br />
     <ol id="options"></ol>
+    <audio src="/sound.wav" id="sound" />
     <script>
       let blocking = false;
       let _i = new URLSearchParams(window.location.search).get("id") || 0;
@@ -17,9 +18,31 @@
       window.score = 0;
       const displayScore = () => {
         alert(score);
+
+        const data = localStorage.getItem("dstate");
+        const state =
+          new URLSearchParams(window.location.search).get("state") || "kerela";
+        localStorage.setItem(
+          "dstate",
+          JSON.stringify(
+            data
+              ? (() => {
+                  data = JSON.parse(data);
+                  data[state] = true;
+                  return data;
+                })()
+              : JSON.parse(`{${state}:true}`)
+          )
+        );
+
         window.location = "/play";
       };
       window.onload = async () => {
+        const audio = document.getElementById("sound");
+        document.addEventListener("click", () => {
+          audio.play();
+        });
+
         let scoreBait = 1000;
         setInterval(() => {
           scoreBait /= 2;

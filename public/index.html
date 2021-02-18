@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
     <link rel="stylesheet" href="style.css" />
-    <script>
+
+    <script defer>
       const { log: c } = console;
       function goto(link) {
         window.location.pathname += `${link}`;
       }
+
+      window.onload = () => {
+        const audio = document.getElementById("sound");
+        document.addEventListener("click", () => {
+          audio.play();
+        });
+      };
     </script>
   </head>
   <body>
     <img src="logo.jpeg" />
-    <h1>Vividham Sanskritam</h1>
+    <h1>
+      Vividham Sanskritam
+      <audio src="/sound.wav" id="sound" />
+    </h1>
     <button onclick="goto('play')">Play</button>
   </body>
 </html>
