@@ -9,6 +9,20 @@
   <body>
     <select name="states" id="states"></select>
     <button onclick="go()">Go</button>
+    <br />
+
+    <div id="instructions">
+      <ol>
+        <li>
+          For every quesiton, you get 1000 points if your answer is correct.
+        </li>
+        <li>But every 4 seconds the score you would receive, halves.</li>
+        <br />
+        <br />
+        <br />
+      </ol>
+    </div>
+
     <script>
       let states;
       window.onload = async () => {

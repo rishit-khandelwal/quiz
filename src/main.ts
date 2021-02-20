@@ -14,8 +14,15 @@ a.get("/quiz", (_, r) => r.sendFile(rs("public/quiz.html")));
 a.get("/:file", (_, r) => r.sendFile(rs(`public/${_.params.file}`)));
 
 a.get("/api/states", (_, r) => {
+  const data = JSON.parse(readFileSync("../secret/questions.json").toString());
+
+  const keys = [];
+  for (const state in data) {
+    keys.push(state);
+  }
+
   return r.json({
-    data: ["Kerela", "Andhra Pradesh", "Jharkhand", "Meghalaya", "Bihar"],
+    data: keys.map((_) => _.toUpperCase()[0] + _.slice(1)),
   });
 });
 
@@ -27,32 +34,32 @@ a.get("/api/getq/:state/:id", ({ params: { state, id } }, res) => {
   res.json(qs.filter((v) => v["id"] == id));
 });
 
-// a.post("/add", (req, res) => {
-//   const { state, ops: options, ...data } = JSON.parse(
-//     decodeURIComponent(req.header("data"))
-//   );
+a.post("/add", (req, res) => {
+  const { state, ops: options, ...data } = JSON.parse(
+    decodeURIComponent(req.header("data"))
+  );
 
-//   const questions = JSON.parse(
-//     readFileSync("../secret/questions.json").toString()
-//   );
+  const questions = JSON.parse(
+    readFileSync("../secret/questions.json").toString()
+  );
 
-//   if (!questions[state]) {
-//     questions[state] = [];
-//     data["id"] = 0;
-//   } else {
-//     data["id"] =
-//       questions[state][(questions[state] || [1]).length - 1]["id"] + 1;
-//   }
-//   data["options"] = options;
+  if (!questions[state]) {
+    questions[state] = [];
+    data["id"] = 0;
+  } else {
+    data["id"] =
+      questions[state][(questions[state] || [1]).length - 1]["id"] + 1;
+  }
+  data["options"] = options;
 
-//   questions[state] = [data];
+  questions[state].push(data);
 
-//   console.log(questions[state]);
+  console.log(questions[state]);
 
-//   writeFileSync("../secret/questions.json", JSON.stringify(questions));
-//   res.json({
-//     stat: 0xabc,
-//   });
-// });
+  writeFileSync("../secret/questions.json", JSON.stringify(questions));
+  res.json({
+    stat: 0xabc,
+  });
+});
 
 a.listen(3000);

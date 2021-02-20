@@ -7,35 +7,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="question"></div>
+    <div style="text-align: center; margin-top: 15px" id="question"></div>
     <br />
     <ol id="options"></ol>
-    <audio src="/sound.wav" id="sound" />
+    <audio src="/sound.wav" id="sound"></audio>
+
+    <div id="popup"></div>
+
     <script>
       let blocking = false;
       let _i = new URLSearchParams(window.location.search).get("id") || 0;
-
+      const popup = document.getElementById("popup");
+      popup.hidden = true;
       window.score = 0;
       const displayScore = () => {
-        alert(score);
-
-        const data = localStorage.getItem("dstate");
-        const state =
-          new URLSearchParams(window.location.search).get("state") || "kerela";
-        localStorage.setItem(
-          "dstate",
-          JSON.stringify(
-            data
-              ? (() => {
-                  data = JSON.parse(data);
-                  data[state] = true;
-                  return data;
-                })()
-              : JSON.parse(`{${state}:true}`)
-          )
-        );
-
-        window.location = "/play";
+        popup.innerHTML = `<h3>Your score was: ${window.score}</h3>
+          <div></div>
+        <a href="/play">Go to menu</a>`;
+        popup.hidden = false;
       };
       window.onload = async () => {
         const audio = document.getElementById("sound");
@@ -46,13 +35,13 @@
         let scoreBait = 1000;
         setInterval(() => {
           scoreBait /= 2;
-        }, 1000);
+        }, 4000);
         try {
           let [{ id, prompt, options, correct }] = await (
             await fetch(
               "/api/getq/" +
                 (new URLSearchParams(window.location.search).get("state") ||
-                  "kerela") +
+                  "kerala") +
                 "/" +
                 _i.toString()
             )
@@ -65,8 +54,9 @@
           } else {
             document.getElementById("question").innerText = prompt;
           }
+
           options.forEach((_, i, a) => {
-            let x = document.createElement("li");
+            let x = document.createElement("div");
             x.innerText = _;
 
             x.onclick = () => {
@@ -75,20 +65,23 @@
               }
               if (i == correct) {
                 x.classList.add("yeehaw");
+                window.score += scoreBait;
                 setTimeout(() => {
                   x.classList.remove("yeehaw");
-                  _i += 1;
-                  document.getElementById("options").innerHTML = "";
-                  window.score += scoreBait;
-                  window.onload();
                 }, 1000);
               } else {
                 console.log("wrong");
                 x.classList.add("cry");
                 setTimeout(() => x.classList.remove("cry"), 1000);
               }
+              _i += 1;
               blocking = true;
-              setTimeout(() => (blocking = false), 700);
+              setTimeout(() => {
+                blocking = false;
+                document.getElementById("question").innerText = "";
+                document.getElementById("options").innerHTML = "";
+                window.onload();
+              }, 700);
             };
 
             document.getElementById("options").appendChild(x);

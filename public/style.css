@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -11,22 +12,31 @@ body {
   flex-direction: column;
 }
 
-img {
-  padding-left: 40vw;
-  width: 20%;
-  height: 20%;
-}
-
 body * {
   font-family: "Roboto";
   text-overflow: clip;
-
   color: #eee;
 }
 
 h1 {
   margin-left: 40vw;
-  /* margin-top: 20vh; */
+}
+
+img {
+  align-self: center;
+  width: 100vw;
+}
+
+@media only screen and (max-width: 1365px) {
+  h1 {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  img {
+    width: 30vw;
+  }
 }
 
 button {
@@ -93,10 +103,6 @@ button:focus {
   font-size: 200%;
 }
 
-#options {
-  font-size: 120%;
-}
-
 select {
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -107,4 +113,30 @@ select {
 option {
   background-color: rgba(0, 0, 0, 1);
   color: #fff;
+}
+
+#options {
+  /* font-size: 120%; */
+  font-size: 20px;
+  text-align: center;
+}
+
+ol span {
+  display: inline;
+}
+
+#popup {
+  padding-top: 200px;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  text-align: center;
+}
+
+#popup a {
+  text-decoration: none;
+}
+
+#instructions {
+  padding-top: 100px;
+  text-align: center;
 }
