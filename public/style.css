@@ -5,6 +5,10 @@
   margin: 0;
   user-select: none;
 }
+/* 
+*.darktheme {
+  background-color: ;
+} */
 
 body {
   background-color: #000;
@@ -49,7 +53,7 @@ button:focus {
   border: none;
 }
 
-#popup {
+/* #popup {
   background-color: #999;
   color: rgba(0, 0, 0, 0);
   width: 30vw;
@@ -58,7 +62,7 @@ button:focus {
   position: absolute;
   z-index: 2;
   margin-left: 30vw;
-}
+} */
 
 .yeehaw {
   color: #0f0;
