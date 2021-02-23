@@ -53,17 +53,6 @@ button:focus {
   border: none;
 }
 
-/* #popup {
-  background-color: #999;
-  color: rgba(0, 0, 0, 0);
-  width: 30vw;
-  text-align: center;
-  justify-self: center;
-  position: absolute;
-  z-index: 2;
-  margin-left: 30vw;
-} */
-
 .yeehaw {
   color: #0f0;
   transition: 0.5s;
