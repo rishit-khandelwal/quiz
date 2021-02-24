@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div style="text-align: center; margin-top: 15px" id="question"></div>
-    <br />
-    <ol id="options"></ol>
-    <audio loop src="/sound.wav" id="sound"></audio>
+    <div id="root">
+      <div style="text-align: center; margin-top: 15px" id="question"></div>
+      <br />
+      <ol id="options"></ol>
+      <audio loop src="/sound.wav" id="sound"></audio>
 
-    <div id="popup"></div>
+      <div id="popup"></div>
+    </div>
 
     <script>
       let blocking = false;
@@ -20,6 +22,7 @@
       const popup = document.getElementById("popup");
       popup.hidden = true;
       window.score = 0;
+
       const displayScore = () => {
         popup.innerHTML = `<h3>Your score was: ${window.score}</h3>
           <div></div>

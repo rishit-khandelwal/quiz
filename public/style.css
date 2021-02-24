@@ -5,12 +5,9 @@
   margin: 0;
   user-select: none;
 }
-/* 
-*.darktheme {
-  background-color: ;
-} */
 
 body {
+  /* background-image: url("/background_bad_background.jpeg"); */
   background-color: #000;
   display: flex;
   flex-direction: column;

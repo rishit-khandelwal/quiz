@@ -25,7 +25,13 @@ a.get("/api/states", (_, r) => {
     data: keys.map((_) => _.toUpperCase()[0] + _.slice(1)),
   });
 });
-
+a.get("/api/facts/", (req, res) => {
+  const state = decodeURIComponent(req.header("state"));
+  const data = JSON.parse(readFileSync("../secret/facts.json").toString());
+  res.json({
+    data: data[state],
+  });
+});
 a.get("/api/getq/:state/:id", ({ params: { state, id } }, res) => {
   const data = readFileSync("../secret/questions.json").toString();
   const qs =
@@ -62,4 +68,4 @@ a.post("/add", (req, res) => {
   });
 });
 
-a.listen(3000);
+a.listen(4000);
