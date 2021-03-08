@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Play</title>
     <link rel="stylesheet" href="style.css" />
+
+    <style>
+      #hazard {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        top: 95vh;
+      }
+    </style>
   </head>
   <body>
-    <!-- <img src="/india.gif" alt="India map" /> -->
     <select name="states" id="states"></select>
-    <button onclick="go()">Go</button>
+    <div id="play" onclick="go()">Go</div>
     <br />
 
     <div id="instructions">
@@ -24,6 +33,7 @@
       </ol>
     </div>
 
+    <script src="startup.js"></script>
     <script>
       let states;
       window.onload = async () => {

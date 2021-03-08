@@ -19,15 +19,29 @@
         });
       };
     </script>
+    <style>
+      body {
+        display: flexbox;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding-top: 100px;
+      }
+
+      #hazard {
+        margin-top: -90px;
+      }
+    </style>
   </head>
   <body>
-    <img src="logo.jpeg" />
-    <h1 style="color: green">
-      <span style="color: orange">Vividham</span> Sanskritam
+    <script src="startup.js"></script>
+    <!-- <img src="logo.jpeg" /> -->
+    <h1 style="color: green; margin: 0; text-align: center">
+      <div style="color: orange">Vividham</div>
+      Sanskritam
       <audio src="/sound.wav" id="sound" />
     </h1>
-    <button onclick="goto('play')">Play</button>
-    <button onclick="goto('history.html')">Know Indian History</button>
+    <div style="margin-top: 50px" onclick="goto('play')" id="play">Play</div>
+    <!-- <button onclick="goto('history.html')">Know Indian History</button> -->
     <br />
   </body>
 </html>

@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body.lm {
+  filter: invert();
+  background-color: #fff;
+}
 
 * {
   padding: 0;
@@ -7,7 +13,6 @@
 }
 
 body {
-  /* background-image: url("/background_bad_background.jpeg"); */
   background-color: #000;
   display: flex;
   flex-direction: column;
@@ -21,6 +26,7 @@ body * {
 
 h1 {
   margin-left: 40vw;
+  font-size: 200%;
 }
 
 img {
@@ -28,25 +34,14 @@ img {
   width: 100vw;
 }
 
-@media only screen and (max-width: 1365px) {
-  h1 {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  img {
-    width: 30vw;
-  }
-}
-
-button {
+#play {
+  text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   font-size: 2rem;
 }
-button:focus {
+#play:focus {
   border: none;
 }
 
@@ -129,4 +124,14 @@ ol span {
 #instructions {
   padding-top: 100px;
   text-align: center;
+}
+
+#hazard {
+  text-align: right;
+  margin-right: 10px;
+  /* margin-top: -90px; */
+}
+
+body.lm h1 {
+  filter: invert();
 }
