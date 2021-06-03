@@ -28,10 +28,7 @@ a.get("/quiz", (_, r) => r.sendFile(rs("public/quiz.html")));
 a.get("/:file", (_, r) => r.sendFile(rs(`public/${_.params.file}`)));
 a.get("/api/states", (_, r) => {
     const data = JSON.parse(fs_1.readFileSync("../secret/questions.json").toString());
-    const keys = [];
-    for (const state in data) {
-        keys.push(state);
-    }
+    const keys = Object.keys(data);
     return r.json({
         data: keys.map((_) => _.toUpperCase()[0] + _.slice(1)),
     });
