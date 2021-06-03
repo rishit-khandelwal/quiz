@@ -16,10 +16,7 @@ a.get("/:file", (_, r) => r.sendFile(rs(`public/${_.params.file}`)));
 a.get("/api/states", (_, r) => {
   const data = JSON.parse(readFileSync("../secret/questions.json").toString());
 
-  const keys = [];
-  for (const state in data) {
-    keys.push(state);
-  }
+  const keys = Object.keys(data);
 
   return r.json({
     data: keys.map((_) => _.toUpperCase()[0] + _.slice(1)),
@@ -41,9 +38,11 @@ a.get("/api/getq/:state/:id", ({ params: { state, id } }, res) => {
 });
 
 a.post("/add", (req, res) => {
-  const { state, ops: options, ...data } = JSON.parse(
-    decodeURIComponent(req.header("data"))
-  );
+  const {
+    state,
+    ops: options,
+    ...data
+  } = JSON.parse(decodeURIComponent(req.header("data")));
 
   const questions = JSON.parse(
     readFileSync("../secret/questions.json").toString()
