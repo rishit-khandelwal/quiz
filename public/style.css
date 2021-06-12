@@ -2,8 +2,9 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 body.lm {
-  filter: invert();
-  background-color: #fff;
+  background-color: black;
+
+  color: #fff;
 }
 
 * {
@@ -13,15 +14,19 @@ body.lm {
 }
 
 body {
-  background-color: #000;
+  /* background-image: url("/test.svg"); */
+  background: white;
+
   display: flex;
   flex-direction: column;
+  height: 100vh;
+
+  color: #000;
 }
 
 body * {
   font-family: "Roboto";
   text-overflow: clip;
-  color: #eee;
 }
 
 h1 {
@@ -36,7 +41,6 @@ img {
 
 #play {
   text-align: center;
-  color: #fff;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   font-size: 2rem;
@@ -45,7 +49,7 @@ img {
   border: none;
 }
 
-.yeehaw {
+body.lm .yeehaw {
   color: #0f0;
   transition: 0.5s;
   animation-name: happy;
@@ -88,22 +92,28 @@ img {
   font-size: 200%;
 }
 
-select {
+body.lm select {
   background-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+select {
+  background-color: white;
   border: none;
   font-size: 200%;
   text-align: center;
 }
 
 option {
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, 0);
   color: #fff;
 }
 
 #options {
-  /* font-size: 120%; */
   font-size: 20px;
   text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 ol span {
@@ -124,14 +134,11 @@ ol span {
 #instructions {
   padding-top: 100px;
   text-align: center;
+  font-size: 200%;
 }
 
 #hazard {
   text-align: right;
   margin-right: 10px;
   /* margin-top: -90px; */
-}
-
-body.lm h1 {
-  filter: invert();
 }
