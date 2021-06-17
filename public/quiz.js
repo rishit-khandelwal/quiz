@@ -61,8 +61,17 @@ window.onload = async () => {
       function playAnimation(el, correct = true) {
         if (correct) {
           el.classList.add("correct");
+          // let confetti = new Confetti("demo");
+
+          // // Edit given parameters
+          // confetti.setCount(75);
+          // confetti.setSize(1);
+          // confetti.setPower(25);
+          // confetti.setFade(false);
+          // confetti.destroyTarget(true);
         } else {
           el.classList.add("wrong");
+          document.body.classList.add("wrong");
         }
       }
 
@@ -76,7 +85,10 @@ window.onload = async () => {
               function onclick(correct) {
                 if (correct) playAnimation(el);
                 else playAnimation(el, false);
-                setTimeout(() => putQuestion(question_number + 1), 300);
+                setTimeout(() => {
+                  document.body.classList.remove("wrong");
+                  putQuestion(question_number + 1);
+                }, 1000);
               }
               if (i == correct) {
                 // el.style.color = "green";
