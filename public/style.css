@@ -1,11 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
-body.lm {
-  background-color: black;
-
-  color: #fff;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
 
 * {
   padding: 0;
@@ -14,131 +9,278 @@ body.lm {
 }
 
 body {
-  /* background-image: url("/test.svg"); */
-  background: white;
+  background: linear-gradient(
+    hsl(27, 74%, 53%) 0 33vh,
+    hsl(0, 0%, 100%) 33vh 66vh,
+    hsl(113, 58%, 46%) 66vh 99vh
+  );
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr 1fr;
+
+  /* align-items: center;
+  justify-content: center; */
+
   height: 100vh;
 
   color: #000;
-}
-
-body * {
   font-family: "Roboto";
-  text-overflow: clip;
 }
 
-h1 {
-  margin-left: 40vw;
-  font-size: 200%;
+.devnagri {
+  font-family: "Poppins", Roboto, sans-serif;
+
+  color: hsl(216, 51%, 49%);
+  text-shadow: -2px 2px 7px hsl(216, 51%, 49%);
+  font-size: 4rem;
+
+  margin-top: 22vw;
+
+  transition: 0.2s;
+}
+.devnagri:hover {
+  transform: scale(1.1, 1.1);
 }
 
-img {
-  align-self: center;
-  width: 100vw;
-}
-
-#play {
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
+.start {
+  min-width: 30vw;
+  /* min-width: min-content; */
   font-size: 2rem;
+
+  background: hsl(0, 0%, 100%);
+  border: 4px solid black;
+
+  padding: 1rem;
+  transition: 0.2s;
+
+  display: block;
 }
-#play:focus {
-  border: none;
+.start:hover {
+  transform: scale(1.1, 1.1);
+
+  box-shadow: 15px 15px 20px black;
 }
 
-body.lm .yeehaw {
-  color: #0f0;
-  transition: 0.5s;
-  animation-name: happy;
-  animation-duration: 0.2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate-reverse;
+#animateme {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 4s ease;
+  animation-fill-mode: forwards;
 }
 
-.cry {
-  color: #f00;
-  transition: 0.5s;
-  animation-name: sad;
-  animation-duration: 0.2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate-reverse;
+#linev1 {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
 }
 
-@keyframes happy {
-  from {
-    /* transform: rotateY(3deg); */
-    transform: translateY(4px);
-  }
+#v1 {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+
+#matra1 {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+#linev2 {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 4s;
+}
+
+#v2 {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 3s;
+}
+
+#dh {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 5.2s;
+}
+
+#m {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 6.9s;
+}
+
+#m-line {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 7.9s;
+}
+
+#final {
+  stroke-dasharray: 1945;
+  stroke-dashoffset: 1945;
+
+  animation: draw 10s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 9s;
+}
+
+@keyframes draw {
   to {
-    transform: translateY(-4px);
-    /* transform: rotateY(-3deg); */
+    stroke-dashoffset: 0;
   }
 }
 
-@keyframes sad {
-  from {
-    transform: rotateY(3deg);
-  }
-  to {
-    transform: rotateY(-3deg);
-  }
+svg {
+  display: none;
 }
 
-#question {
-  transition: 0.4s;
-  font-size: 200%;
-}
+/*
+ play.html
+*/
 
-body.lm select {
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
-}
 select {
-  background-color: white;
-  border: none;
-  font-size: 200%;
-  text-align: center;
+  width: 90vw;
+  height: 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+
+  padding-left: 1rem;
+
+  border: 2px solid hsl(0, 0%, 0%);
+  border-radius: 25px;
+  background-color: hsl(0, 0%, 100%);
+
+  transition: 0.2s;
 }
 
-option {
-  background-color: rgba(0, 0, 0, 0);
-  color: #fff;
+select:hover {
+  box-shadow: 10px 10px 20px #555;
 }
 
-#options {
-  font-size: 20px;
-  text-align: center;
+/* ask.html */
+div#fact {
+  width: 50vw;
+  font-weight: 600;
+  font-size: 1.2rem;
 
+  color: hsl(216, 79%, 27%);
+}
+.gtquiz {
+  width: 30vw;
+  font-size: 2rem;
+  background: hsl(0, 0%, 100%);
+  border: 4px solid black;
+
+  padding: 1rem;
+  transition: 0.2s;
+}
+.gtquiz:hover {
+  transform: scale(1.1, 1.1);
+
+  box-shadow: 10px 10px 20px black;
+}
+
+.options {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  /* justify-items: center; */
+  /* place-items: center; */
+
+  height: 20vh;
+  width: 100%;
+  max-width: 80vw;
+}
+.options * {
+  background-color: hsl(221, 81%, 37%);
+  color: hsl(0, 0%, 100%);
+  font-size: 2rem;
+  display: block;
+  min-width: 5vw;
+  min-height: 5vh;
+
+  text-align: center;
+
+  margin-top: 2vh;
+  margin-left: 2vw;
+  padding-top: 1vh;
+
+  transition: 0.2s;
+  border-radius: 10px;
 }
 
-ol span {
-  display: inline;
+.options *:hover {
+  box-shadow: 10px 10px 20px hsl(221, 81%, 37%);
 }
 
-#popup {
-  padding-top: 200px;
-  background-color: rgba(0, 0, 0, 0);
-  color: #fff;
+/* Animation Classes */
+.correct {
+  animation-name: correct;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes correct {
+  to {
+    color: greenyellow;
+    background-color: hsl(27, 100%, 45%);
+  }
+}
+
+.wrong {
+  animation-name: wrong;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes wrong {
+  to {
+    color: hsl(0, 59%, 53%);
+    background-color: hsl(229, 58%, 45%);
+  }
+}
+
+/* Score Popup */
+.score-popup {
+  display: none;
+
+  width: 60vw;
+  height: 40vw;
+
+  background-color: hsl(0, 0%, 100%);
+  border: 2px solid hsl(0, 0%, 0%);
+  border-radius: 25px;
+  font-size: 2rem;
   text-align: center;
 }
-
-#popup a {
-  text-decoration: none;
-}
-
-#instructions {
-  padding-top: 100px;
-  text-align: center;
-  font-size: 200%;
-}
-
-#hazard {
-  text-align: right;
-  margin-right: 10px;
-  /* margin-top: -90px; */
+.visible {
+  display: block;
 }

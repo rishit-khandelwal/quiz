@@ -6,53 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      div {
-        margin-top: 10px;
-        margin-right: 15px;
-        margin-left: 15px;
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="ask.js"></script>
   </head>
   <body>
-    <div id="root" style="text-align: center">
-      <span><div id="play" @click="goto">Open Quiz!</div></span>
+    <div id="fact"></div>
 
-      <div>{{ fact }}</div>
-    </div>
-
-    <script>
-      window.onload = async () => {
-        const state = new URLSearchParams(window.location.search).get("state");
-        const facts = (
-          await (
-            await fetch(`/api/facts/`, {
-              headers: new Headers({
-                state: state,
-              }),
-            })
-          ).json()
-        )["data"];
-
-        const app = new Vue({
-          el: "#root",
-          data: {
-            fact: (() => {
-              try {
-                return facts[Math.floor(Math.random() * facts.length)];
-              } catch {
-                return "";
-              }
-            })(),
-          },
-          methods: {
-            goto: function (url) {
-              window.location.pathname = `/quiz`;
-            },
-          },
-        });
-      };
-    </script>
+    <button onclick="window.location.pathname = '/quiz'" class="gtquiz">
+      goto quiz
+    </button>
   </body>
 </html>

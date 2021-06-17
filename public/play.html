@@ -2,66 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Play</title>
     <link rel="stylesheet" href="style.css" />
+    <title>Play</title>
 
-    <style>
-      #hazard {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-
-        top: 95vh;
-      }
-    </style>
+    <script defer src="play.js"></script>
   </head>
   <body>
-    <select name="states" id="states">
-      <option value>Select a state from this list</option>
+    <select id="state">
+      <option value>Select State</option>
     </select>
-    <div id="play" onclick="go()">Go</div>
-    <br />
-
-    <div id="instructions">
-      <ol>
-        <li>
-          For every quesiton, you get 1000 points if your answer is correct.
-        </li>
-        <li>But every 4 seconds the score you would receive, halves.</li>
-	<br />
-	<br />
-	<br />
-     </ol>
-    </div>
-
-    <script src="startup.js"></script>
-    <script>
-      let states;
-      window.onload = async () => {
-        const state = document.getElementById("states");
-        const value = await (await fetch("/api/states")).json();
-
-        states = value["data"];
-
-        value["data"].forEach((v) => {
-          state.add(
-            (() => {
-              let x = document.createElement("option");
-              x.innerText = v;
-              return x;
-            })()
-          );
-        });
-      };
-      async function showPopUpFor(state) {
-        window.location = `/ask.html?state=${encodeURIComponent(state)}`;
-      }
-
-      function go() {
-        const state = document.getElementById("states");
-        showPopUpFor(states[state.selectedIndex].toLowerCase());
-      }
-    </script>
   </body>
 </html>

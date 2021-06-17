@@ -9,6 +9,7 @@ const a = e();
 
 a.get("/", (_, r) => r.sendFile(rs("public/index.html")));
 a.get("/play", (_, r) => r.sendFile(rs("public/play.html")));
+a.get("/ask", (_, r) => r.sendFile(rs("public/ask.html")));
 a.get("/quiz", (_, r) => r.sendFile(rs("public/quiz.html")));
 
 a.get("/:file", (_, r) => r.sendFile(rs(`public/${_.params.file}`)));

@@ -2,22 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz!</title>
+    <title>Quiz</title>
+
     <link rel="stylesheet" href="style.css" />
+    <script src="quiz.js" defer></script>
   </head>
   <body>
-    <script src="startup.js"></script>
-
-    <div id="root">
-      <div style="text-align: center; margin-top: 15px" id="question"></div>
-      <br />
-      <ol id="options"></ol>
-      <audio loop src="/sound.wav" id="sound"></audio>
-
-      <div id="popup"></div>
+    <h1 class="prompt"></h1>
+    <div class="options"></div>
+    <div class="score-popup">
+      <div class="score"></div>
     </div>
-
-    <script src="quiz.js"></script>
   </body>
 </html>

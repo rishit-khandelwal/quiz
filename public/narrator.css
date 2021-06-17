@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.narrator-text {
+  font-family: "Press Start 2P";
+
+  background-color: hsl(0, 100%, 100%);
+  padding: 10px;
+  border: 2px solid black;
+
+  top: calc(100vh - 322px);
+
+  position: absolute;
+
+  filter: opacity(0);
+
+  animation-name: reveal;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  /* animation-delay: 0s; */
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(-100px);
+    filter: opacity(0);
+  }
+
+  40% {
+    filter: opacity(1);
+    transform: translate(0px);
+  }
+
+  100% {
+    filter: opacity(0);
+  }
+}

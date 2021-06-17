@@ -1,76 +1,102 @@
-let blocking = false;
-let _i = new URLSearchParams(window.location.search).get("id") || 0;
-const popup = document.getElementById("popup");
-popup.hidden = true;
-window.score = 0;
-
-const displayScore = () => {
-  popup.innerHTML = `<h3>Your score was: ${window.score}</h3>
-          <div></div>
-        <a href="/play">Go to menu</a>`;
-  popup.hidden = false;
-};
 window.onload = async () => {
-  const audio = document.getElementById("sound");
-  document.addEventListener("click", () => {
-    audio.play();
-  });
+  const state = new URLSearchParams(window.location.search).get("state");
+  let score = 0;
+  let question_number = 0;
+  if (!state) window.location.pathname = "/ask";
 
-  let scoreBait = 1000;
-  setInterval(() => {
-    scoreBait /= 2;
-  }, 4000);
-  try {
-    let [{ id, prompt, options, correct }] = await (
-      await fetch(
-        "/api/getq/" +
-          (new URLSearchParams(window.location.search).get("state") ||
-            "kerala") +
-          "/" +
-          _i.toString()
-      )
-    ).json();
+  function displayScore(score) {
+    document.querySelector("div.options").style.display = "none";
+    document.querySelector("h1.prompt").hidden = true;
+    document.querySelector("div.score-popup").classList.add("visible");
+    document.querySelector(
+      "div.score-popup .score"
+    ).innerText = `Your score is: ${score}`;
+    let scores;
+    if ((scores = localStorage.getItem("scores"))) {
+      try {
+        scores = atob(scores);
+        scores = JSON.parse(scores);
+        scores.push(JSON.parse(`{"${state}": ${score}}`));
 
-    if (prompt.startsWith("html:")) {
-      document.getElementById("question").innerHTML = prompt
-        .slice(5)
-        .replaceAll(";", "");
+        localStorage.setItem("scores", btoa(JSON.stringify(scores)));
+      } catch (e) {
+        console.error(e);
+        return;
+      }
     } else {
-      document.getElementById("question").innerText = prompt;
+      localStorage.setItem("scores", btoa(JSON.stringify([])));
     }
-
-    options.forEach((_, i, a) => {
-      let x = document.createElement("div");
-      x.innerText = _;
-
-      x.onclick = () => {
-        if (blocking) {
-          return;
-        }
-        if (i == correct) {
-          x.classList.add("yeehaw");
-          window.score += scoreBait;
-          setTimeout(() => {
-            x.classList.remove("yeehaw");
-          }, 1000);
-        } else {
-          console.log("wrong");
-          x.classList.add("cry");
-          setTimeout(() => x.classList.remove("cry"), 1000);
-        }
-        _i += 1;
-        blocking = true;
-        setTimeout(() => {
-          blocking = false;
-          document.getElementById("question").innerText = "";
-          document.getElementById("options").innerHTML = "";
-          window.onload();
-        }, 700);
-      };
-
-      document.getElementById("options").appendChild(x);
-    });
-  } catch {
-    displayScore();
+    setTimeout(() => (window.location.href = window.location.origin), 2000);
   }
+
+  async function putQuestion(question_number) {
+    try {
+      let html_prompt,
+        htmlMode = false;
+      const [{ correct, options, prompt }] = await fetch(
+        `/api/getq/${state}/${question_number}`
+      ).then((r) => r.json());
+      if (prompt.startsWith("html:")) {
+        const parts = prompt.split(";");
+        const html = parts[0].split(":")[1];
+        html_prompt = `${html}${parts[1]}`;
+        htmlMode = true;
+      }
+      const promptElem = document.querySelector("h1.prompt");
+      if (!htmlMode) {
+        promptElem.innerText = `
+      ${question_number + 1}. ${prompt}
+          `;
+      } else {
+        promptElem.innerHTML = `
+        ${question_number + 1}. ${html_prompt}
+            `;
+      }
+
+      const optionsEl = document.querySelector("div.options");
+      while (optionsEl.firstChild) {
+        optionsEl.removeChild(optionsEl.lastChild);
+      }
+
+      function playAnimation(el, correct = true) {
+        if (correct) {
+          el.classList.add("correct");
+        } else {
+          el.classList.add("wrong");
+        }
+      }
+
+      options
+        .map((v) => `${v}`)
+        .forEach((v, i) => {
+          optionsEl.appendChild(
+            (() => {
+              const el = document.createElement("div");
+              el.innerText = v;
+              function onclick(correct) {
+                if (correct) playAnimation(el);
+                else playAnimation(el, false);
+                setTimeout(() => putQuestion(question_number + 1), 300);
+              }
+              if (i == correct) {
+                // el.style.color = "green";
+                el.onclick = () => {
+                  score += 1;
+                  onclick(true);
+                };
+              } else {
+                el.onclick = () => {
+                  onclick();
+                };
+              }
+              return el;
+            })()
+          );
+        });
+    } catch (e) {
+      displayScore(score);
+    }
+  }
+
+  await putQuestion(question_number);
 };

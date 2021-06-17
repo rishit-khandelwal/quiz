@@ -1,0 +1,85 @@
+.charecter {
+  display: inline;
+  position: absolute;
+
+  top: calc(100vh - 322px);
+
+  animation-name: jumpjump;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate-reverse; */
+}
+
+@keyframes jumpjump {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  5% {
+    transform: translate(30px, -20px);
+  }
+  10% {
+    transform: translate(60px, 0px);
+  }
+
+  15% {
+    transform: translate(90px, -20px);
+  }
+  20% {
+    transform: translate(120px, 0px);
+  }
+
+  25% {
+    transform: translate(150px, -20px);
+  }
+
+  30% {
+    transform: translate(180px, 0px);
+  }
+
+  35% {
+    transform: translate(210px, -20px);
+  }
+
+  40% {
+    transform: translate(240px, 0px);
+  }
+
+  45% {
+    transform: translate(270px, -20px);
+  }
+
+  50% {
+    transform: translate(300px, 0px) scaleX(-1);
+  }
+
+  55% {
+    transform: translate(270px, -20px) scaleX(-1);
+  }
+  60% {
+    transform: translate(240px, 0px) scaleX(-1);
+  }
+  65% {
+    transform: translate(210px, -20px) scaleX(-1);
+  }
+  70% {
+    transform: translate(180px, 0px) scaleX(-1);
+  }
+  75% {
+    transform: translate(150px, -20px) scaleX(-1);
+  }
+  80% {
+    transform: translate(120px, 0px) scaleX(-1);
+  }
+  85% {
+    transform: translate(90px, -20px) scaleX(-1);
+  }
+  90% {
+    transform: translate(60px, 0px) scaleX(-1);
+  }
+  95% {
+    transform: translate(30px, -20px) scaleX(-1);
+  }
+  100% {
+    transform: translate(0px, 0px) scaleX(-1);
+  }
+}

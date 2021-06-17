@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="canvas" style="width: 100vw; height: 100vh">India map</canvas>
+    <script>
+      window.onload = () => {
+        const states = {
+          "madhya pradesh": [213, 398],
+          bihar: [385, 330],
+          rajasthan: [123, 292],
+          maharashtra: [163, 491],
+          karnataka: [159, 615],
+          telangana: [226, 529],
+          chattisgarh: [300, 432],
+          gujrat: [75, 400],
+          "andhra pradesh": [228, 610],
+          "uttar pradesh": [270, 300],
+          kerela: [175, 730],
+          "tamil nadu": [220, 710],
+          uttarakhand: [230, 200],
+          "himachal pradesh": [195, 155],
+          haryana: [175, 230],
+          punjab: [155, 185],
+          odissa: [340, 470],
+          jharkhand: [360, 390],
+          "west bengal": [415, 400],
+          "arunachal pradesh": [560, 260],
+          assam: [520, 315],
+          mizoram: [525, 400],
+          tripura: [500, 390],
+          manipur: [550, 360],
+          manipur: [550, 360],
+          meghalaya: [490, 340],
+          nagaland: [560, 320],
+          sikkim: [435, 275],
+        };
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const image = new Image();
+        image.src = "/india.gif";
+
+        image.style.transform = "scale(0.2,0.2)";
+
+        image.onload = () => {
+          const ratio = 500 / 578;
+          const height = 150;
+          ctx.drawImage(image, 0, 0, ratio * height, height);
+
+          const done = JSON.parse(atob(localStorage.getItem("scores"))).map(
+            (v) => Object.keys(v)[0]
+          );
+
+          for (let state in states) {
+            let [x, y] = states[state];
+            let d = 27;
+            x *= d;
+            y *= d;
+
+            if (done.find((v) => v == state)) ctx.fillStyle = "red";
+            else ctx.fillStyle = "black";
+
+            ctx.beginPath();
+            ctx.arc(x / ((500 / 578) * 150), y / 150, 1, 0, 2 * Math.PI, true);
+            ctx.fill();
+          }
+        };
+        canvas.onclick = (e) => {
+          console.log(e.x, e.y);
+        };
+
+        // console.log(JSON.parse(atob(localStorage.getItem("scores"))));
+      };
+    </script>
+  </body>
+</html>
