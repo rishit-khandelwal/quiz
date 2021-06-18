@@ -7,7 +7,7 @@
   padding: 10px;
   border: 2px solid black;
 
-  top: calc(100vh - 422px);
+  top: calc(100vh - 522px);
 
   position: absolute;
 
@@ -25,12 +25,11 @@
     filter: opacity(0);
   }
 
-  10% {
+  20% {
     filter: opacity(1);
     transform: translate(0px);
   }
 
   100% {
-    filter: opacity(0);
   }
 }

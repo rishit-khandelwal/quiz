@@ -31,7 +31,7 @@
         const heads = new Headers({
           data: encodeURI(
             JSON.stringify({
-              state: state.toLowerCase(),
+              state: state.toLowerCase().trim(),
               prompt: prompt,
               ops: options,
               correct: correct,

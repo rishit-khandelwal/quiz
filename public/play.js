@@ -4,14 +4,16 @@ document.querySelector("select").onchange = (e) => {
   window.location = `/ask.html?state=${encodeURIComponent(state)}`;
 };
 
-let states;
 window.onload = async () => {
+  let states;
   const state = document.getElementById("state");
   const value = await (await fetch("/api/states")).json();
 
   states = value["data"];
 
-  value["data"].forEach((v) => {
+  states.sort();
+
+  states.forEach((v) => {
     state.add(
       (() => {
         let x = document.createElement("option");

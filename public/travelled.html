@@ -48,8 +48,6 @@
         const image = new Image();
         image.src = "/india.gif";
 
-        image.style.transform = "scale(0.2,0.2)";
-
         image.onload = () => {
           const ratio = 500 / 578;
           const height = 150;
@@ -73,11 +71,6 @@
             ctx.fill();
           }
         };
-        canvas.onclick = (e) => {
-          console.log(e.x, e.y);
-        };
-
-        // console.log(JSON.parse(atob(localStorage.getItem("scores"))));
       };
     </script>
   </body>

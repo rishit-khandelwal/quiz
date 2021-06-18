@@ -2,7 +2,34 @@ window.onload = async () => {
   const state = new URLSearchParams(window.location.search).get("state");
   let score = 0;
   let question_number = 0;
+  let pressed = false;
   if (!state) window.location.pathname = "/ask";
+
+  function startTimer(seconds) {
+    const timerEl = document.querySelector("#timer");
+
+    timerEl.innerText = `${seconds}`;
+    let ctime = seconds;
+    let wtime = seconds;
+
+    // ! wtime seconds 0
+    // ! width 100 0
+
+    const timer = setInterval(() => {
+      timerEl.innerText = `${ctime-- - 1}`;
+      if (ctime == 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    const widthTimer = setInterval(() => {
+      if ((wtime / seconds) * 100 == 0) clearInterval(widthTimer);
+      timerEl.style.width = `${(wtime / seconds) * 100}px`;
+      timerEl.style.paddingLeft = `${(wtime / seconds) * 20}px`;
+      timerEl.style.paddingRight = `${(wtime / seconds) * 20}px`;
+      wtime -= 1 / 100;
+    }, 10);
+  }
 
   function displayScore(score) {
     document.querySelector("div.options").style.display = "none";
@@ -31,6 +58,7 @@ window.onload = async () => {
 
   async function putQuestion(question_number) {
     try {
+      pressed = false;
       let html_prompt,
         htmlMode = false;
       const [{ correct, options, prompt }] = await fetch(
@@ -45,12 +73,12 @@ window.onload = async () => {
       const promptElem = document.querySelector("h1.prompt");
       if (!htmlMode) {
         promptElem.innerText = `
-      ${question_number + 1}. ${prompt}
+          ${question_number + 1}. ${prompt}
           `;
       } else {
         promptElem.innerHTML = `
-        ${question_number + 1}. ${html_prompt}
-            `;
+          ${question_number + 1}. ${html_prompt}
+          `;
       }
 
       const optionsEl = document.querySelector("div.options");
@@ -61,17 +89,8 @@ window.onload = async () => {
       function playAnimation(el, correct = true) {
         if (correct) {
           el.classList.add("correct");
-          // let confetti = new Confetti("demo");
-
-          // // Edit given parameters
-          // confetti.setCount(75);
-          // confetti.setSize(1);
-          // confetti.setPower(25);
-          // confetti.setFade(false);
-          // confetti.destroyTarget(true);
         } else {
           el.classList.add("wrong");
-          document.body.classList.add("wrong");
         }
       }
 
@@ -84,21 +103,43 @@ window.onload = async () => {
               el.innerText = v;
               function onclick(correct) {
                 if (correct) playAnimation(el);
-                else playAnimation(el, false);
+                else {
+                  playAnimation(el, false);
+                }
                 setTimeout(() => {
-                  document.body.classList.remove("wrong");
                   putQuestion(question_number + 1);
-                }, 1000);
+                }, 4000);
               }
               if (i == correct) {
-                // el.style.color = "green";
                 el.onclick = () => {
-                  score += 1;
+                  if (!pressed) score += 1;
                   onclick(true);
+
+                  const popupEl = document.querySelector("#popup");
+                  popupEl.innerText = `Yay! You got it right!`;
+                  popupEl.classList.add("narrator-text");
+                  setTimeout(() => {
+                    popupEl.innerText = ``;
+                    popupEl.classList.remove("narrator-text");
+                  }, 4000);
+
+                  pressed = true;
                 };
               } else {
                 el.onclick = () => {
                   onclick();
+
+                  const correctOption = options[correct];
+
+                  const popupEl = document.querySelector("#popup");
+                  popupEl.innerText = `Correct Answer was "${correctOption}"`;
+                  popupEl.classList.add("narrator-text");
+                  setTimeout(() => {
+                    popupEl.innerText = ``;
+                    popupEl.classList.remove("narrator-text");
+                  }, 4000);
+
+                  pressed = true;
                 };
               }
               return el;

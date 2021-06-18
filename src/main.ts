@@ -56,11 +56,9 @@ a.post("/add", (req, res) => {
     data["id"] =
       questions[state][(questions[state] || [1]).length - 1]["id"] + 1;
   }
-  data["options"] = options;
+  data["options"] = options.map(v => v.trim());
 
   questions[state].push(data);
-
-  console.log(questions[state]);
 
   writeFileSync("../secret/questions.json", JSON.stringify(questions));
   res.json({

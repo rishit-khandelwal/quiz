@@ -304,3 +304,10 @@ body.wrong {
     transform: translate(50px, 0px) rotate(2deg);
   }
 }
+
+.prompt {
+  color: #2824ea;
+}
+.prompt img {
+  max-height: 50vh;
+}
