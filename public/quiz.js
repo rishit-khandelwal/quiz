@@ -125,34 +125,36 @@ window.onload = async () => {
               }
               if (i == correct) {
                 el.onclick = () => {
-                  if (!pressed) score += 1;
-                  onclick(true);
+                  if (!pressed) {
+                    score += 1;
+                    pressed = true;
+                    onclick(true);
 
-                  const popupEl = document.querySelector("#popup");
-                  popupEl.innerText = `Yay! You got it right!`;
-                  popupEl.classList.add("narrator-text");
-                  setTimeout(() => {
-                    popupEl.innerText = ``;
-                    popupEl.classList.remove("narrator-text");
-                  }, 4000);
-
-                  pressed = true;
+                    const popupEl = document.querySelector("#popup");
+                    popupEl.innerText = `Yay! You got it right!`;
+                    popupEl.classList.add("narrator-text");
+                    setTimeout(() => {
+                      popupEl.innerText = ``;
+                      popupEl.classList.remove("narrator-text");
+                    }, 4000);
+                  }
                 };
               } else {
                 el.onclick = () => {
-                  onclick();
+                  if (!pressed) {
+                    pressed = true;
+                    onclick();
 
-                  const correctOption = options[correct];
+                    const correctOption = options[correct];
 
-                  const popupEl = document.querySelector("#popup");
-                  popupEl.innerText = `Correct Answer was "${correctOption}"`;
-                  popupEl.classList.add("narrator-text");
-                  setTimeout(() => {
-                    popupEl.innerText = ``;
-                    popupEl.classList.remove("narrator-text");
-                  }, 4000);
-
-                  pressed = true;
+                    const popupEl = document.querySelector("#popup");
+                    popupEl.innerText = `Correct Answer was "${correctOption}"`;
+                    popupEl.classList.add("narrator-text");
+                    setTimeout(() => {
+                      popupEl.innerText = ``;
+                      popupEl.classList.remove("narrator-text");
+                    }, 4000);
+                  }
                 };
               }
               return el;

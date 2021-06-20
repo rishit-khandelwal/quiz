@@ -21,6 +21,7 @@
 
 .narrator-text.p3 {
   top: calc(100vh - 450px);
+  animation-duration: 8s;
 }
 
 @keyframes reveal {
