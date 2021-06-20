@@ -19,6 +19,10 @@
   /* animation-delay: 0s; */
 }
 
+.narrator-text.p3 {
+  top: calc(100vh - 450px);
+}
+
 @keyframes reveal {
   0% {
     transform: translate(-100px);

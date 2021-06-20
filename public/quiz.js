@@ -1,5 +1,13 @@
 window.onload = async () => {
   const state = new URLSearchParams(window.location.search).get("state");
+  const history = localStorage.getItem("scores");
+  if (history) {
+    const dones = JSON.parse(atob(history));
+    console.log(dones, history);
+    if (dones.map((v) => Object.keys(v)[0]).includes(state)) {
+      window.location.pathname = "/";
+    }
+  } else window.location.pathname = "/";
   let score = 0;
   let question_number = 0;
   let pressed = false;
@@ -43,6 +51,11 @@ window.onload = async () => {
       try {
         scores = atob(scores);
         scores = JSON.parse(scores);
+
+        if (scores.map((v) => Object.keys(v)[0]).includes(state)) {
+          return;
+        }
+
         scores.push(JSON.parse(`{"${state}": ${score}}`));
 
         localStorage.setItem("scores", btoa(JSON.stringify(scores)));

@@ -7,7 +7,17 @@
   animation-name: jumpjump;
   animation-duration: 3s;
   animation-iteration-count: infinite;
-  /* animation-direction: alternate-reverse; */
+}
+
+.charecter.p2 {
+  margin-left: calc(100vw - 650px);
+}
+
+.charecter.p3 {
+  animation: falldown 1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
 }
 
 @keyframes jumpjump {
@@ -81,5 +91,14 @@
   }
   100% {
     transform: translate(0px, 0px) scaleX(-1);
+  }
+}
+
+@keyframes falldown {
+  0% {
+  }
+
+  100% {
+    top: 0;
   }
 }
