@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vividham Sanskritam</title>
+
+    <script src="/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      canvas {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let font, ylvl;
+      let score;
+      function setup() {
+        createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+        font = loadFont("/RobotoMono-Regular.ttf");
+        textFont(font);
+        ylvl = 0;
+
+        let sscores = localStorage.getItem("scores");
+        sscores = atob(sscores);
+        sscores = JSON.parse(sscores);
+        sscores = sscores
+          .map((v) => v[Object.keys(v)])
+          .reduce((a, v) => a + v, 0);
+        let mscores = localStorage.getItem("megaScore");
+
+        score = parseInt(mscores) + parseInt(sscores);
+      }
+
+      function logo() {
+        fill(255, 150, 0);
+
+        text(`Vividham`, -32 * 12, ylvl - 32);
+
+        fill(100, 240, 100);
+        text(`Sanskritam`, -32 * 6.5, ylvl - 32);
+        fill(255);
+        text(`- Your Score was`, -32 * 0.1, ylvl - 32);
+        fill(0, 100, 250);
+        text(`${score}`, 32 * 10, ylvl - 32);
+      }
+
+      function draw() {
+        background(0);
+
+        fill(0, 150, 255);
+        textSize(32);
+
+        origin = -32 * 5;
+
+        logo();
+
+        if (ylvl < 32) {
+          fill(255, 150, 0);
+          text(
+            "Made By students of DPS Rau Indore:\n- Rishit Khandelwal\n- Ishaan Agrawal\n- Geet Tiwari",
+            origin,
+            ylvl + height
+          );
+        }
+        ylvl += -1;
+      }
+    </script>
+  </body>
+</html>

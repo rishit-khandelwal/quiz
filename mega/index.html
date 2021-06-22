@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mega Quiz</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+      :root {
+        --bg-color: #33280b;
+      }
+
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+        background: var(--bg-color);
+        color: #eee;
+
+        font-family: "Roboto Mono", sans-serif;
+
+        user-select: none;
+      }
+
+      .rotateble {
+        position: absolute;
+        display: block;
+
+        width: 500px;
+        height: 500px;
+
+        border-radius: 100%;
+
+        background: #cd9035;
+
+        margin-left: calc(100vw - 600px);
+        margin-top: calc(100vh - 600px);
+      }
+
+      .rotateble .hole {
+        width: 400px;
+        height: 400px;
+        display: block;
+        position: absolute;
+
+        clip-path: circle(50%);
+        background-color: var(--bg-color);
+
+        margin-left: 50px;
+        margin-top: 50px;
+      }
+
+      .floatable {
+        position: absolute;
+        display: block;
+        background: hsl(217, 84%, 58%);
+
+        padding: 5px;
+
+        margin-left: 250px;
+        margin-top: 250px;
+
+        max-width: 190px;
+      }
+
+      .questionpropmt {
+        position: absolute;
+
+        font-size: 24px;
+
+        margin-top: 10px;
+        margin-left: 10px;
+
+        max-width: calc(100vw - 600px - 10px);
+        max-height: calc(50vh - 10px);
+      }
+
+      .qimg {
+        position: absolute;
+
+        margin-top: 60vh;
+        max-height: 40vh;
+      }
+
+      .correct {
+        animation: correct-anim 0.4s cubic-bezier(0, 1.01, 1, 0.88);
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes correct-anim {
+        to {
+          background: hsl(110, 37%, 51%);
+          color: hsl(217, 84%, 58%);
+        }
+      }
+
+      .wrong {
+        animation: wrong-anim 0.4s cubic-bezier(0, 1.01, 1, 0.88);
+        animation-fill-mode: forwards;
+
+        color: hsl(233, 84%, 58%);
+      }
+
+      @keyframes wrong-anim {
+        0% {
+          background: hsl(24, 69%, 51%);
+        }
+
+        20% {
+          background: hsl(12, 69%, 51%);
+        }
+
+        40% {
+          background: hsl(24, 69%, 51%);
+        }
+
+        60% {
+          background: hsl(12, 69%, 51%);
+        }
+
+        80% {
+          background: hsl(24, 69%, 51%);
+        }
+
+        100% {
+          background: hsl(12, 69%, 51%);
+        }
+      }
+
+      .score {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="score"></div>
+    <div class="questionpropmt">Prompt</div>
+    <img src="" alt="" class="qimg" />
+    <div id="options" class="rotateble">
+      <div class="hole"></div>
+      <div id="option-floaty"></div>
+    </div>
+
+    <script>
+      function nextQuestion(qno) {
+        qno++;
+        getQuestion(qno);
+      }
+      async function getQuestion(question_number) {
+        localStorage.setItem("megaQuestion", question_number);
+
+        console.log(question_number);
+
+        const { data: question } = await fetch(
+          `/api/mega/${question_number}`
+        ).then((r) => r.json());
+
+        if (!question) {
+          window.location = "/finished.html";
+        }
+
+        let pressed = false;
+
+        document.querySelector(".questionpropmt").innerText = `Q${
+          question_number + 1
+        }. ${question.prompt}`;
+
+        if (question.file) {
+          document.querySelector(".qimg").src = `/uploads/${question.file}`;
+        } else {
+          document.querySelector(".qimg").src = "";
+        }
+
+        const elem = document.getElementById("option-floaty");
+
+        while (elem.firstChild) {
+          elem.removeChild(elem.lastChild);
+        }
+
+        for (const option in question.options) {
+          const el = document.createElement("div");
+          el.classList.add("floatable");
+          el.innerText = question.options[option];
+
+          el.onclick = () => {
+            if (!pressed) {
+              if (option == question.correct) {
+                el.classList.add("correct");
+              } else {
+                el.classList.add("wrong");
+              }
+
+              pressed = true;
+
+              setTimeout(() => {
+                let score = parseInt(localStorage.getItem("megaScore"));
+                localStorage.setItem("megaScore", ++score);
+                nextQuestion(question_number);
+              }, 2000);
+            }
+          };
+
+          elem.appendChild(el);
+        }
+
+        startRotationAnim();
+      }
+      window.onload = async function () {
+        let scores;
+        if ((scores = localStorage.getItem("scores"))) {
+          scores = atob(scores);
+          scores = JSON.parse(scores);
+
+          let totalScore = scores
+            .map((v) => {
+              return [Object.keys(v)[0], v[Object.keys(v)[0]]];
+            })
+            .map(([, score]) => score)
+            .reduce((v, acc) => v + acc, 0);
+          if (totalScore < 80) {
+            alert(totalScore);
+            window.location = "/";
+          }
+        }
+        let qno = 0;
+        if (!localStorage.getItem("megaQuestion")) {
+          let qn = qno;
+
+          localStorage.setItem("megaQuestion", qn);
+        } else {
+          let qn = parseInt(localStorage.getItem("megaQuestion"));
+          qno = qn;
+        }
+
+        if (!localStorage.getItem("megaScore")) {
+          localStorage.setItem("megaScore", 0);
+        }
+
+        getQuestion(qno);
+      };
+
+      function startRotationAnim() {
+        const el = document.querySelectorAll(".floatable");
+
+        let counter = 0;
+        const speed = 0.005;
+        setInterval(() => {
+          el.forEach((v, ind) => {
+            el[ind].style.transform = `translate(${
+              Math.cos((2 * Math.PI * ind) / el.length + counter) * 250 -
+              v.clientWidth / 2
+            }px, ${
+              Math.sin((2 * Math.PI * ind) / el.length + counter) * 250 -
+              v.clientHeight / 2
+            }px)`;
+          });
+          counter += speed;
+        }, 10);
+      }
+    </script>
+  </body>
+</html>

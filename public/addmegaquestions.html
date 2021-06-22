@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add questions</title>
+</head>
+
+<body>
+  <input id="question" placeholder="Prompt" />
+  <div id="options">
+    <input id="id-1" placeholder="Option 1" />
+  </div>
+  <button onclick="addOption()">Add Option</button>
+  <input type="number" id="correct" placeholder="Correct Option 1/2/3/4" />
+  <button onclick="put()">Add</button>
+  <input type="file" name="media" id="media-upload" />
+
+  </form>
+
+  <script>
+    function addOption() {
+      let k = 0;
+      while (++k) {
+        if (!document.getElementById(`id-${k}`)) break;
+      }
+      let el = document.createElement("input");
+      el.placeholder = `Option ${k}`;
+      el.id = `id-${k}`;
+      document.getElementById("options").appendChild(el);
+    }
+    function put() {
+      const prompt = document.getElementById("question").value;
+
+      let options = [];
+
+      let k = 0;
+      while (++k) {
+        if (!document.getElementById(`id-${k}`)) break;
+
+        options.push(document.getElementById(`id-${k}`).value);
+      }
+
+      const correct = document.getElementById("correct").value - 1;
+
+      let file;
+      
+      if (media = document.getElementById('media-upload').files[0]) {
+        file = media.name
+        let form = new FormData()
+        form.append(
+          'media', media
+        )
+
+        fetch('/upload-media', { method: 'POST', body: form })
+      }
+
+      const heads = new Headers({
+        data: encodeURI(
+          JSON.stringify({
+            prompt,
+            options,
+            correct,
+          })
+        ),
+        file: file.toString()
+      });
+
+      fetch("/addmega", {
+        method: "POST",
+        headers: heads,
+      })
+      .then((s) => s.json())
+
+        .then(({ stat }) => {
+          alert(stat == 0xabc ? "Success" : "Error");
+
+
+          // window.location.href = "";
+        });
+    }
+  </script>
+</body>
+
+</html>

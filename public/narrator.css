@@ -16,7 +16,11 @@
   animation-name: reveal;
   animation-duration: 4s;
   animation-fill-mode: forwards;
-  /* animation-delay: 0s; */
+}
+
+.narrator-text:hover {
+  transition-duration: 2s;
+  filter: opacity(1);
 }
 
 .narrator-text.p3 {
