@@ -39,7 +39,7 @@
           .reduce((a, v) => a + v, 0);
         let mscores = localStorage.getItem("megaScore");
 
-        score = parseInt(mscores) + parseInt(sscores);
+        score = parseInt(mscores) * 2 + parseInt(sscores);
       }
 
       function logo() {
@@ -51,7 +51,7 @@
         text(`Sanskritam`, -32 * 6.5, ylvl - 32);
         fill(255);
         text(`- Your Score was`, -32 * 0.1, ylvl - 32);
-        fill(0, 100, 250);
+        fill(0, 150, 250);
         text(`${score}`, 32 * 10, ylvl - 32);
       }
 

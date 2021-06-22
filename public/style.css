@@ -6,14 +6,12 @@
   padding: 0;
   margin: 0;
   user-select: none;
+
+  cursor: url("/sword.svg"), auto;
 }
 
 body {
-  background: linear-gradient(
-    hsl(27, 74%, 53%) 0 33vh,
-    hsl(0, 0%, 100%) 33vh 66vh,
-    hsl(113, 58%, 46%) 66vh 99vh
-  );
+  background: #5baf54;
 
   display: grid;
   place-items: center;
@@ -37,15 +35,43 @@ body {
 
   margin-top: 22vw;
 
-  transition: 0.2s;
+  animation: hide 2s ease;
+  filter: opacity(0);
 }
-.devnagri:hover {
-  transform: scale(1.1, 1.1);
+
+@keyframes hide {
+  0% {
+    filter: opacity(0);
+  }
+
+  50% {
+    filter: opacity(1);
+  }
+
+  100% {
+    filter: opacity(0);
+  }
+}
+
+img[src="/clouds.svg"] {
+  position: absolute;
+
+  animation: clouds 20s ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes clouds {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .start {
   min-width: 30vw;
-  /* min-width: min-content; */
   font-size: 2rem;
 
   background: hsl(0, 0%, 100%);

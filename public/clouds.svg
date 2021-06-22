@@ -1,0 +1,92 @@
+<svg width="654" height="228" viewBox="0 0 654 228" fill="none" xmlns="http://www.w3.org/2000/svg" >
+<g filter="url(#filter0_d)">
+<circle cx="274" cy="116" r="50" fill="#ABDDE3"/>
+<circle cx="274" cy="116" r="50" fill="#ABDDE3"/>
+<circle cx="274" cy="116" r="50" fill="#ABDDE3"/>
+<circle cx="231" cy="144" r="50" fill="#ABDDE3"/>
+<circle cx="231" cy="144" r="50" fill="#ABDDE3"/>
+<circle cx="231" cy="144" r="50" fill="#ABDDE3"/>
+<circle cx="387" cy="103" r="50" fill="#ABDDE3"/>
+<circle cx="387" cy="103" r="50" fill="#ABDDE3"/>
+<circle cx="387" cy="103" r="50" fill="#ABDDE3"/>
+<circle cx="374" cy="144" r="50" fill="#ABDDE3"/>
+<circle cx="374" cy="144" r="50" fill="#ABDDE3"/>
+<circle cx="374" cy="144" r="50" fill="#ABDDE3"/>
+<circle cx="324" cy="103" r="50" fill="#ABDDE3"/>
+<circle cx="324" cy="103" r="50" fill="#ABDDE3"/>
+<circle cx="324" cy="103" r="50" fill="#ABDDE3"/>
+<circle cx="317" cy="166" r="50" fill="#ABDDE3"/>
+<circle cx="317" cy="166" r="50" fill="#ABDDE3"/>
+<circle cx="317" cy="166" r="50" fill="#ABDDE3"/>
+</g>
+<g filter="url(#filter1_d)">
+<circle cx="111" cy="84" r="50" fill="#ABDDE3"/>
+<circle cx="111" cy="84" r="50" fill="#ABDDE3"/>
+<circle cx="111" cy="84" r="50" fill="#ABDDE3"/>
+<circle cx="68" cy="112" r="50" fill="#ABDDE3"/>
+<circle cx="68" cy="112" r="50" fill="#ABDDE3"/>
+<circle cx="68" cy="112" r="50" fill="#ABDDE3"/>
+<circle cx="224" cy="71" r="50" fill="#ABDDE3"/>
+<circle cx="224" cy="71" r="50" fill="#ABDDE3"/>
+<circle cx="224" cy="71" r="50" fill="#ABDDE3"/>
+<circle cx="211" cy="112" r="50" fill="#ABDDE3"/>
+<circle cx="211" cy="112" r="50" fill="#ABDDE3"/>
+<circle cx="211" cy="112" r="50" fill="#ABDDE3"/>
+<circle cx="161" cy="71" r="50" fill="#ABDDE3"/>
+<circle cx="161" cy="71" r="50" fill="#ABDDE3"/>
+<circle cx="161" cy="71" r="50" fill="#ABDDE3"/>
+<circle cx="154" cy="134" r="50" fill="#ABDDE3"/>
+<circle cx="154" cy="134" r="50" fill="#ABDDE3"/>
+<circle cx="154" cy="134" r="50" fill="#ABDDE3"/>
+</g>
+<g filter="url(#filter2_d)">
+<circle cx="460" cy="70" r="50" fill="#ABDDE3"/>
+<circle cx="460" cy="70" r="50" fill="#ABDDE3"/>
+<circle cx="460" cy="70" r="50" fill="#ABDDE3"/>
+<circle cx="417" cy="98" r="50" fill="#ABDDE3"/>
+<circle cx="417" cy="98" r="50" fill="#ABDDE3"/>
+<circle cx="417" cy="98" r="50" fill="#ABDDE3"/>
+<circle cx="573" cy="57" r="50" fill="#ABDDE3"/>
+<circle cx="573" cy="57" r="50" fill="#ABDDE3"/>
+<circle cx="573" cy="57" r="50" fill="#ABDDE3"/>
+<circle cx="560" cy="98" r="50" fill="#ABDDE3"/>
+<circle cx="560" cy="98" r="50" fill="#ABDDE3"/>
+<circle cx="560" cy="98" r="50" fill="#ABDDE3"/>
+<circle cx="510" cy="57" r="50" fill="#ABDDE3"/>
+<circle cx="510" cy="57" r="50" fill="#ABDDE3"/>
+<circle cx="510" cy="57" r="50" fill="#ABDDE3"/>
+<circle cx="503" cy="120" r="50" fill="#ABDDE3"/>
+<circle cx="503" cy="120" r="50" fill="#ABDDE3"/>
+<circle cx="503" cy="120" r="50" fill="#ABDDE3"/>
+</g>
+<defs>
+<filter id="filter0_d" x="181" y="53" width="297" height="175" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dx="35" dy="6"/>
+<feGaussianBlur stdDeviation="3"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<filter id="filter1_d" x="0" y="2" width="314" height="221" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dx="11" dy="10"/>
+<feGaussianBlur stdDeviation="14.5"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<filter id="filter2_d" x="366" y="0" width="288" height="195" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dx="15" dy="9"/>
+<feGaussianBlur stdDeviation="8"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+</defs>
+</svg>
+
