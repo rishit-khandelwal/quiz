@@ -196,8 +196,13 @@
               pressed = true;
 
               setTimeout(() => {
-                let score = parseInt(localStorage.getItem("megaScore"));
-                localStorage.setItem("megaScore", ++score);
+                if (option == question.correct) {
+                  let score = parseInt(localStorage.getItem("megaScore"));
+                  localStorage.setItem("megaScore", ++score);
+                } else {
+                  let score = parseInt(localStorage.getItem("megaScore"));
+                  localStorage.setItem("megaScore", --score);
+                }
                 nextQuestion(question_number);
               }, 2000);
             }
